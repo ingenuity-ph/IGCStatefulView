@@ -17,6 +17,7 @@ final class IGCStateView: UIView {
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: Lifecycle
@@ -34,7 +35,7 @@ final class IGCStateView: UIView {
     // MARK: Private Methods
     
     private func setup() {
-        let bundle = Bundle(identifier: "com.ingenuitymobile.IGCStatefulView")!
+        let bundle = Bundle(for: IGCStateView.self)
         
         bundle.loadNibNamed("StateView", owner: self, options: nil)
         
@@ -46,7 +47,11 @@ final class IGCStateView: UIView {
     
     // MARK: Public Methods
     
-    func setupInfo(with params: [String: String?], image: UIImage?, forLoadingState: Bool = true) {
+    func setupInfo(with params: [String: String?],
+                   image: UIImage?,
+                   styleParams: [String: Any]?,
+                   forLoadingState: Bool = true) {
+        // Content
         self.imageView.isHidden = forLoadingState
         self.centerConstraint.constant = 30
         
@@ -73,7 +78,40 @@ final class IGCStateView: UIView {
         if let message = params["message"] as? String {
             self.messageLabel.text = message
         }
+        
+        // Style
+        guard let styleParams = styleParams else {
+            return
+        }
+        
+        if let titleStyleParams = styleParams["title"] as? [String: Any] {
+            if let font = titleStyleParams["font"] as? UIFont {
+                self.titleLabel.font = font
+            }
+            
+            if let color = titleStyleParams["color"] as? UIColor {
+                self.titleLabel.textColor = color
+            }
+        }
+        
+        if let messageStyleParams = styleParams["message"] as? [String: Any] {
+            if let font = messageStyleParams["font"] as? UIFont {
+                self.messageLabel.font = font
+            }
+            
+            if let color = messageStyleParams["color"] as? UIColor {
+                self.messageLabel.textColor = color
+            }
+        }
+        
+        if let imageStyleParams = styleParams["image"] as? [String: Any] {
+            if let size = imageStyleParams["size"] {
+                self.heightConstraint.constant = CGFloat(size as! Int)
+                
+                
+                self.imageView.updateConstraints()
+            }
+        }
     }
     
 }
-

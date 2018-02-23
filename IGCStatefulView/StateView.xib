@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="centerConstraint" destination="jmM-Jo-W4Z" id="t8d-mn-Gqt"/>
                 <outlet property="contentView" destination="WoB-Kn-GEm" id="V8f-yx-6vX"/>
+                <outlet property="heightConstraint" destination="pbr-J1-p7z" id="LVq-gk-GM7"/>
                 <outlet property="imageView" destination="oUj-fd-cl2" id="LgO-vy-ta7"/>
                 <outlet property="indicatorView" destination="kq9-RF-DD5" id="GB8-jS-8QT"/>
                 <outlet property="messageLabel" destination="n6D-qf-Mt3" id="GrZ-7q-vHw"/>
