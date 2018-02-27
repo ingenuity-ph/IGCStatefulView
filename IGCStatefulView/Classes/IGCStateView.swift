@@ -17,8 +17,8 @@ final class IGCStateView: UIView {
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var centerConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var centerConstraint: NSLayoutConstraint!
     
     // MARK: Lifecycle
     
