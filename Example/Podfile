@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'IGCStatefulView_Example' do
+  pod 'IGCStatefulView', :path => '../'
+
+  target 'IGCStatefulView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
