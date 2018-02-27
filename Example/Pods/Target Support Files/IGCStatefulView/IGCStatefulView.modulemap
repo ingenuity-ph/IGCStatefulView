@@ -1,0 +1,6 @@
+framework module IGCStatefulView {
+  umbrella header "IGCStatefulView-umbrella.h"
+
+  export *
+  module * { export * }
+}

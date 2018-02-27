@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IGCStatefulView'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of IGCStatefulView.'
+  s.version          = '0.1.1'
+  s.summary          = 'Displays a corresponding data state (loading, error, etc) for a UIView instance (includes UITableView and UICollectionView).'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,22 +18,23 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A UIView extension wherein the capability of displaying states is available to properly convey to users the current state of the view with respect to its current data.
                        DESC
 
-  s.homepage         = 'https://github.com/gia-vt/IGCStatefulView'
+  s.homepage         = 'https://github.com/jason-ingenuity/IGCStatefulView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'gia-vt' => 'jason@ingenuity.ph' }
-  s.source           = { :git => 'https://github.com/gia-vt/IGCStatefulView.git', :tag => s.version.to_s }
+  s.author           = { 'Jason Jon E. Carreos' => 'jason@ingenuity.ph' }
+  s.source           = { :git => 'https://github.com/jason-ingenuity/IGCStatefulView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'IGCStatefulView/Classes/**/*'
-  
+  s.resource =  'IGCStatefulView/**/*.xib'
+
   # s.resource_bundles = {
-  #   'IGCStatefulView' => ['IGCStatefulView/Assets/*.png']
+  #   'IGCStatefulView' => ['IGCStatefulView/Resources/StateView.xib']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'

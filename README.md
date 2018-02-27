@@ -22,7 +22,7 @@ pod 'IGCStatefulView'
 
 ## Author
 
-gia-vt, jason@ingenuity.ph
+Jason Jon E. Carreos (jason@ingenuity.ph)
 
 ## License
 
