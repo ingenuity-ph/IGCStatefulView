@@ -1,13 +1,13 @@
 # IGCStatefulView
 
-[![CI Status](http://img.shields.io/travis/jason-ingenuity/IGCStatefulView.svg?style=flat)](https://travis-ci.org/jason-ingenuity/IGCStatefulView)
+[![CI Status](http://img.shields.io/travis/ingenuity-ph/IGCStatefulView.svg?style=flat)](https://travis-ci.org/ingenuity-ph/IGCStatefulView)
 [![Version](https://img.shields.io/cocoapods/v/IGCStatefulView.svg?style=flat)](http://cocoapods.org/pods/IGCStatefulView)
 [![License](https://img.shields.io/cocoapods/l/IGCStatefulView.svg?style=flat)](http://cocoapods.org/pods/IGCStatefulView)
 [![Platform](https://img.shields.io/cocoapods/p/IGCStatefulView.svg?style=flat)](http://cocoapods.org/pods/IGCStatefulView)
 
 ## Example
 
-![IGCStatefulView](https://github.com/jason-ingenuity/IGCStatefulView/blob/master/Screens/stateview.gif)
+![IGCStatefulView](https://github.com/ingenuity-ph/IGCStatefulView/blob/master/Screens/stateview.gif)
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
@@ -45,11 +45,11 @@ Customizing is available but fairly limited to a few options for each of the sta
 
 ##### Code
 
-![IGCStatefulView](https://github.com/jason-ingenuity/IGCStatefulView/blob/master/Screens/alloptions.png)
+![IGCStatefulView](https://github.com/ingenuity-ph/IGCStatefulView/blob/master/Screens/alloptions.png)
 
 ##### Output
 
-![IGCStatefulView](https://github.com/jason-ingenuity/IGCStatefulView/blob/master/Screens/alloptions.gif)
+![IGCStatefulView](https://github.com/ingenuity-ph/IGCStatefulView/blob/master/Screens/alloptions.gif)
 
 
 ## TODO

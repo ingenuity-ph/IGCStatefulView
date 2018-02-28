@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 A UIView extension wherein the capability of displaying states is available to properly convey to users the current state of the view with respect to its current data.
                        DESC
 
-  s.homepage         = 'https://github.com/jason-ingenuity/IGCStatefulView'
+  s.homepage         = 'https://github.com/ingenuity-ph/IGCStatefulView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jason Jon E. Carreos' => 'jason@ingenuity.ph' }
-  s.source           = { :git => 'https://github.com/jason-ingenuity/IGCStatefulView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/ingenuity-ph/IGCStatefulView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
