@@ -11,14 +11,32 @@ import UIKit
 
 /// An enum for determining the current state of a `UIView` instance.
 ///
-/// - success: No state view will be displayed since actual `UIView` content is available.
+/// - success: No state view will be displayed since `UIView` content is available.
 /// - loading: A loading state view will be displayed to indicate fetching and populating of data.
 /// - error: An error state view will be displayed to indicate error on fetching data.
 /// - none: Same behavior as `success`. May be used as default.
 public enum IGCViewState {
+    /// No state view will be displayed since `UIView` content is available.
     case success
+    /// A loading state view will be displayed to indicate fetching and populating of data.
+    /// - message: Text to be displayed.
+    /// - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
+    ///                For `title` and `message`, `font` and `color` options are available.
+    ///                For `image`, `size` option is available.
+    ///                For `indicator`, `tint` option is available.
     case loading(message: String?, styleParams: [String: Any]?)
-    case error(image: UIImage?, title: String?, message: String, styleParams: [String: Any]?)
+    /// An error state view will be displayed to indicate error on fetching data.
+    /// - image: Image to be displayed.
+    /// - title: Primary text to be displayed.
+    /// - message: Supporting text to be displayed.
+    /// - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
+    ///                For `title` and `message`, `font` and `color` options are available.
+    ///                For `image`, `size` option is available.
+    ///                For `indicator`, `tint` option is available.
+    /// - buttonAction: Closure to be executed when button is pressed.
+    ///                 Not supplying this parameter will not display the button.
+    case error(image: UIImage?, title: String?, message: String, styleParams: [String: Any]?, buttonAction: ((UIButton) -> Void)?)
+    /// Same behavior as `success`. May be used as default.
     case none
 }
 
@@ -32,9 +50,17 @@ public extension UIView {
         case .loading(message: let message, styleParams: let styleParams):
             self.removeDataStateView()
             self.addSubview(loadingView(with: message, styleParams: styleParams))
-        case .error(image: let image, title: let title, message: let message, styleParams: let styleParams):
+        case .error(image: let image,
+                    title: let title,
+                    message: let message,
+                    styleParams: let styleParams,
+                    buttonAction: let buttonAction):
             self.removeDataStateView()
-            self.addSubview(errorView(with: image, title: title, message: message, styleParams: styleParams))
+            self.addSubview(errorView(with: image,
+                                      title: title,
+                                      message: message,
+                                      styleParams: styleParams,
+                                      buttonAction: buttonAction))
         default:
             self.removeDataStateView()
         }
@@ -46,19 +72,25 @@ public extension UIView {
     ///   - image: Icon to display to the state view.
     ///   - title: Title of the state view.
     ///   - message: Supplementary message of the state view.
-    ///   - styleParams: Dictionary containing either title, message, image keys containing
-    ///                  dictionary values with either font, color, size key-values for styling.
+    ///   - styleParams: Dictionary containing either `title`, `message`, `image`, `indicator`, and/or `button` key-value pairs.
+    ///                  For `title`, `message`, and `button`, `font` and `color` options are available.
+    ///                  For `image`, `size` option is available.
+    ///                  For `indicator`, `tint` option is available.
+    ///   - buttonAction: Closure to be executed when button is pressed.
+    ///                   Not supplying this parameter will not display the button.
     /// - Returns: A `IGCStateView` instance configured with supplied parameters.
     private func errorView(with image: UIImage?,
                            title: String?,
                            message: String,
-                           styleParams: [String: Any]?) -> IGCStateView {
+                           styleParams: [String: Any]?,
+                           buttonAction: ((UIButton) -> Void)?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
         view.setupInfo(with: ["message": message, "title": title],
                        image: image,
                        styleParams: styleParams,
-                       forLoadingState: false)
+                       forLoadingState: false,
+                       buttonAction: buttonAction)
         
         return view
     }
@@ -67,15 +99,18 @@ public extension UIView {
     ///
     /// - Parameters:
     ///   - message: Supplementary message of the state view.
-    ///   - styleParams: Dictionary containing either title, message, image keys containing
-    ///                  dictionary values with either font, color, size key-values for styling.
+    ///   - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
+    ///                  For `title` and `message`, `font` and `color` options are available.
+    ///                  For `image`, `size` option is available.
+    ///                  For `indicator`, `tint` option is available.
     /// - Returns: A `IGCStateView` instance configured with supplied parameters.
     private func loadingView(with message: String? = nil, styleParams: [String: Any]?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
         view.setupInfo(with: ["message": message],
                        image: nil,
-                       styleParams: styleParams)
+                       styleParams: styleParams,
+                       buttonAction: nil)
         
         return view
     }

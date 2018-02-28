@@ -10,6 +10,10 @@ import UIKit
 
 final class IGCStateView: UIView {
     
+    // MARK: Properties
+    
+    private var action: (UIButton) -> Void = {_ in }
+    
     // MARK: Outlets
     
     @IBOutlet private var contentView: UIView!
@@ -17,6 +21,7 @@ final class IGCStateView: UIView {
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var messageLabel: UILabel!
+    @IBOutlet private weak var button: UIButton!
     @IBOutlet private weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var centerConstraint: NSLayoutConstraint!
     
@@ -39,10 +44,17 @@ final class IGCStateView: UIView {
         
         bundle.loadNibNamed("StateView", owner: self, options: nil)
         
+        self.button.contentEdgeInsets = UIEdgeInsetsMake(5,5,5,5)
+        
+        // Content View
         self.addSubview(self.contentView)
         
         self.contentView.frame = self.bounds
         self.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+    
+    @objc private func onButtonTap() {
+        self.action(self.button)
     }
     
     // MARK: Public Methods
@@ -56,10 +68,13 @@ final class IGCStateView: UIView {
     ///                  `title` and `message` can be configured by suppling `font` and `color`, while the
     ///                  `image` can be updated by `size`.
     ///   - forLoadingState: Determines if view is for loading state.
+    ///   - buttonAction: Closure to be executed when button is pressed.
+    ///                   Not supplying this parameter will not display the button.
     func setupInfo(with params: [String: String?],
                    image: UIImage?,
                    styleParams: [String: Any]?,
-                   forLoadingState: Bool = true) {
+                   forLoadingState: Bool = true,
+                   buttonAction: ((UIButton) -> Void)?) {
         // Content
         self.imageView.isHidden = forLoadingState
         self.centerConstraint.constant = 30
@@ -86,6 +101,13 @@ final class IGCStateView: UIView {
         
         if let message = params["message"] as? String {
             self.messageLabel.text = message
+        }
+        
+        if let action = buttonAction {
+            self.action = action
+            self.button.isHidden = false
+            
+            self.button.addTarget(self, action: #selector(self.onButtonTap), for: .touchUpInside)
         }
         
         // Style
@@ -119,6 +141,22 @@ final class IGCStateView: UIView {
                 
                 
                 self.imageView.updateConstraints()
+            }
+        }
+        
+        if let indicatorStyleParams = styleParams["indicator"] as? [String: Any] {
+            if let tintColor = indicatorStyleParams["tint"] as? UIColor {
+                self.indicatorView.tintColor = tintColor
+            }
+        }
+        
+        if let buttonStyleParams = styleParams["button"] as? [String: Any] {
+            if let font = buttonStyleParams["font"] as? UIFont {
+                self.button.titleLabel?.font = font
+            }
+            
+            if let color = buttonStyleParams["color"] as? UIColor {
+                self.button.tintColor = color
             }
         }
     }

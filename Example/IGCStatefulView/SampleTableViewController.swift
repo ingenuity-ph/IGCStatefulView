@@ -52,12 +52,30 @@ class SampleTableViewController: UIViewController {
         self.tableView.setViewDataState(.loading(message: "Loading...", styleParams: nil))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.tableView.setViewDataState(.error(image: UIImage(named: "icon"),
-                                                   title: "Error",
-                                                   message: "Please try again later",
-                                                   styleParams: ["title": ["font": UIFont(name: "HelveticaNeue-Bold", size: 30)],
-                                                                 "message": ["font": UIFont(name: "HelveticaNeue", size: 20),
-                                                                             "color": UIColor.darkGray]]))
+            let status: IGCViewState = .error(
+                image: UIImage(named: "icon"),
+                title: "Error",
+                message: "Please try again later",
+                styleParams: ["title": ["font": UIFont(name: "HelveticaNeue-Bold", size: 30),
+                                        "color": UIColor.darkGray],
+                              "message": ["font": UIFont(name: "HelveticaNeue", size: 20),
+                                          "color": UIColor.lightGray],
+                              "image": ["size": 100],
+                              "indicator": ["tint": UIColor.black],
+                              "button": ["font": UIFont(name: "HelveticaNeue", size: 16),
+                                         "color": UIColor.black]],
+                buttonAction: { button in
+                    let alert = UIAlertController(title: "Alert",
+                                                  message: button.title(for: .normal),
+                                                  preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Ok",
+                                                  style: .default,
+                                                  handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+            })
+            
+            self.tableView.setViewDataState(status)
         }
     }
 
