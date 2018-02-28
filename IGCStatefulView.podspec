@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IGCStatefulView'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'Displays a corresponding data state (loading, error, etc) for a UIView instance (includes UITableView and UICollectionView).'
 
 # This description is used to generate tags and improve search results.
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 A UIView extension wherein the capability of displaying states is available to properly convey to users the current state of the view with respect to its current data.
                        DESC
 
-  s.homepage         = 'https://github.com/jason-ingenuity/IGCStatefulView'
+  s.homepage         = 'https://github.com/ingenuity-ph/IGCStatefulView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jason Jon E. Carreos' => 'jason@ingenuity.ph' }
-  s.source           = { :git => 'https://github.com/jason-ingenuity/IGCStatefulView.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/ingenuity-ph/IGCStatefulView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
