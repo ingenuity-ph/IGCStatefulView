@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IGCStateView" customModule="IGCStatefulView" customModuleProvider="target">
             <connections>
+                <outlet property="button" destination="Xel-Cx-PQl" id="6b3-qf-Djb"/>
                 <outlet property="centerConstraint" destination="jmM-Jo-W4Z" id="t8d-mn-Gqt"/>
                 <outlet property="contentView" destination="WoB-Kn-GEm" id="V8f-yx-6vX"/>
                 <outlet property="heightConstraint" destination="pbr-J1-p7z" id="LVq-gk-GM7"/>
@@ -52,16 +53,26 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xel-Cx-PQl">
+                    <rect key="frame" x="164.5" y="383.5" width="47" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="DgU-SN-LQn"/>
+                    </constraints>
+                    <state key="normal" title="Reload"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="kq9-RF-DD5" firstAttribute="top" secondItem="oUj-fd-cl2" secondAttribute="bottom" constant="-20" id="044-OP-jR9"/>
+                <constraint firstItem="Xel-Cx-PQl" firstAttribute="top" secondItem="n6D-qf-Mt3" secondAttribute="bottom" constant="20" id="CFO-rR-t5l"/>
                 <constraint firstItem="n6D-qf-Mt3" firstAttribute="leading" secondItem="WoB-Kn-GEm" secondAttribute="leading" constant="10" id="Cfh-Eo-cc0"/>
                 <constraint firstItem="oUj-fd-cl2" firstAttribute="centerX" secondItem="WoB-Kn-GEm" secondAttribute="centerX" id="MMY-09-b9b"/>
                 <constraint firstItem="n6D-qf-Mt3" firstAttribute="top" secondItem="5eB-jH-LsX" secondAttribute="bottom" id="MsL-AS-BJw"/>
                 <constraint firstItem="kq9-RF-DD5" firstAttribute="centerX" secondItem="WoB-Kn-GEm" secondAttribute="centerX" id="NEo-p2-tiq"/>
                 <constraint firstItem="kq9-RF-DD5" firstAttribute="centerY" secondItem="WoB-Kn-GEm" secondAttribute="centerY" id="V6V-4q-Yn3"/>
                 <constraint firstAttribute="trailing" secondItem="n6D-qf-Mt3" secondAttribute="trailing" constant="10" id="cDE-Yn-sGu"/>
+                <constraint firstItem="Xel-Cx-PQl" firstAttribute="centerX" secondItem="WoB-Kn-GEm" secondAttribute="centerX" id="dYS-ZT-liN"/>
                 <constraint firstItem="5eB-jH-LsX" firstAttribute="centerY" secondItem="WoB-Kn-GEm" secondAttribute="centerY" constant="30" id="jmM-Jo-W4Z"/>
                 <constraint firstAttribute="trailing" secondItem="5eB-jH-LsX" secondAttribute="trailing" id="qXZ-Jy-Ho2"/>
                 <constraint firstItem="5eB-jH-LsX" firstAttribute="leading" secondItem="WoB-Kn-GEm" secondAttribute="leading" id="yJj-F3-dPB"/>

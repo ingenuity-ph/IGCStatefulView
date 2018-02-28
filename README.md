@@ -22,9 +22,11 @@ it, simply add the following line to your Podfile:
 pod 'IGCStatefulView'
 ```
 
-## Usage
+## Overview
 
-This package is heavily inspired by [SDStateTableView](https://github.com/sauvikdolui/SDStateTableView).
+A big thanks to [Sauvik Dolui](https://github.com/sauvikdolui) and his library, [SDStateTableView](https://github.com/sauvikdolui/SDStateTableView) for giving me the inspiration to create my own take on stateful views.
+
+## Usage
 
 It serves as an extension to UIView instances wherein it adds a `setViewDataState` method. It accepts a pre-defined enum `IGCStatefulView`. Sample usage is as follows:
 
@@ -38,6 +40,17 @@ self.tableView.setViewDataState(.loading(message: "Loading...", styleParams: nil
 // UICollectionView
 self.collectionView.setViewDataState(.success)
 ```
+
+Customizing is available but fairly limited to a few options for each of the state view's attributes, namely: `title`, `message`, `image`, `indicator`, and `button`. Here, a sample styling implementation of all available options is provided, along with its input.
+
+##### Code
+
+![IGCStatefulView](https://github.com/jason-ingenuity/IGCStatefulView/blob/master/Screens/alloptions.png)
+
+##### Output
+
+![IGCStatefulView](https://github.com/jason-ingenuity/IGCStatefulView/blob/master/Screens/alloptions.gif)
+
 
 ## TODO
 
