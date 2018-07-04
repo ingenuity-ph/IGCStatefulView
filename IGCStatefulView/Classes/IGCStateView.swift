@@ -70,11 +70,11 @@ final class IGCStateView: UIView {
     ///   - forLoadingState: Determines if view is for loading state.
     ///   - buttonAction: Closure to be executed when button is pressed.
     ///                   Not supplying this parameter will not display the button.
-    func setupInfo(with params: [String: String?],
-                   image: UIImage?,
-                   styleParams: [String: Any]?,
-                   forLoadingState: Bool = true,
-                   buttonAction: ((UIButton) -> Void)?) {
+    func setupStateView(with params: [String: String?],
+                        image: UIImage?,
+                        styleParams: [String: Any]?,
+                        forLoadingState: Bool = true,
+                        buttonAction: ((UIButton) -> Void)?) {
         // Content
         self.imageView.isHidden = forLoadingState
         self.centerConstraint.constant = 30
@@ -95,14 +95,6 @@ final class IGCStateView: UIView {
             }
         }
         
-        if let title = params["title"] as? String {
-            self.titleLabel.text = title
-        }
-        
-        if let message = params["message"] as? String {
-            self.messageLabel.text = message
-        }
-        
         if let action = buttonAction {
             self.action = action
             self.button.isHidden = false
@@ -110,11 +102,33 @@ final class IGCStateView: UIView {
             self.button.addTarget(self, action: #selector(self.onButtonTap), for: .touchUpInside)
         }
         
+        self.setupInfo(params)
+        
         // Style
         guard let styleParams = styleParams else {
             return
         }
         
+        self.setupStyle(styleParams)
+    }
+    
+    /// Set various info messages to this instance.
+    ///
+    /// - Parameter infoParams: UIDictionary instance containing necessary strings to pre-defined properties.
+    private func setupInfo(_ infoParams: [String: String?]) {
+        if let title = infoParams["title"] as? String {
+            self.titleLabel.text = title
+        }
+        
+        if let message = infoParams["message"] as? String {
+            self.messageLabel.text = message
+        }
+    }
+    
+    /// Applies styling to this instance based on provided dictionary.
+    ///
+    /// - Parameter styleParams: UIDictionary instance containing necessary stying to pre-defined properties.
+    private func setupStyle(_ styleParams: [String: Any]) {
         if let titleStyleParams = styleParams["title"] as? [String: Any] {
             if let font = titleStyleParams["font"] as? UIFont {
                 self.titleLabel.font = font
@@ -138,7 +152,6 @@ final class IGCStateView: UIView {
         if let imageStyleParams = styleParams["image"] as? [String: Any] {
             if let size = imageStyleParams["size"] {
                 self.heightConstraint.constant = CGFloat(size as! Int)
-                
                 
                 self.imageView.updateConstraints()
             }

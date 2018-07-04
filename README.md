@@ -32,13 +32,13 @@ It serves as an extension to UIView instances wherein it adds a `setViewDataStat
 
 ```swift
 // UIView
-self.infoView.setViewDataState(.loading(message: nil, styleParams: nil))
+self.infoView.configureViewDataState(as: .loading(message: nil, styleParams: nil))
 
 // UITableView
-self.tableView.setViewDataState(.loading(message: "Loading...", styleParams: nil))
+self.tableView.configureViewDataState(as: .loading(message: "Loading...", styleParams: nil))
 
 // UICollectionView
-self.collectionView.setViewDataState(.success)
+self.collectionView.configureViewDataState(as: .success)
 ```
 
 Customizing is available but fairly limited to a few options for each of the state view's attributes, namely: `title`, `message`, `image`, `indicator`, and `button`. Here, a sample styling implementation of all available options is provided, along with its input.

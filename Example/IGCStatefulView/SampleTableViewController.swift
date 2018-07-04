@@ -47,12 +47,14 @@ class SampleTableViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        var state: IGCViewState = .loading(message: "Loading...", styleParams: nil)
+        
         super.viewWillAppear(animated)
         
-        self.tableView.setViewDataState(.loading(message: "Loading...", styleParams: nil))
+        self.tableView.configureViewDataState(as: state)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let status: IGCViewState = .error(
+            state = .error(
                 image: UIImage(named: "icon"),
                 title: "Error",
                 message: "Please try again later",
@@ -72,10 +74,11 @@ class SampleTableViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "Ok",
                                                   style: .default,
                                                   handler: nil))
+                    
                     self.present(alert, animated: true, completion: nil)
             })
             
-            self.tableView.setViewDataState(status)
+            self.tableView.configureViewDataState(as: state)
         }
     }
 

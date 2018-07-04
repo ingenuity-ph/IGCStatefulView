@@ -35,7 +35,12 @@ public enum IGCViewState {
     ///                For `indicator`, `tint` option is available.
     /// - buttonAction: Closure to be executed when button is pressed.
     ///                 Not supplying this parameter will not display the button.
-    case error(image: UIImage?, title: String?, message: String, styleParams: [String: Any]?, buttonAction: ((UIButton) -> Void)?)
+    case error(
+        image: UIImage?,
+        title: String?,
+        message: String,
+        styleParams: [String: Any]?,
+        buttonAction: ((UIButton) -> Void)?)
     /// Same behavior as `success`. May be used as default.
     case none
 }
@@ -45,7 +50,7 @@ public extension UIView {
     /// Sets a corresponding `IGCStateView` to a `UIView` instance based on provided `IGCViewState`.
     ///
     /// - Parameter state: `IGCViewState` with its corresponding parameters.
-    public func setViewDataState(_ state: IGCViewState) {
+    public func configureViewDataState(as state: IGCViewState) {
         switch state {
         case .loading(message: let message, styleParams: let styleParams):
             self.removeDataStateView()
@@ -86,11 +91,11 @@ public extension UIView {
                            buttonAction: ((UIButton) -> Void)?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
-        view.setupInfo(with: ["message": message, "title": title],
-                       image: image,
-                       styleParams: styleParams,
-                       forLoadingState: false,
-                       buttonAction: buttonAction)
+        view.setupStateView(with: ["message": message, "title": title],
+                            image: image,
+                            styleParams: styleParams,
+                            forLoadingState: false,
+                            buttonAction: buttonAction)
         
         return view
     }
@@ -107,10 +112,10 @@ public extension UIView {
     private func loadingView(with message: String? = nil, styleParams: [String: Any]?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
-        view.setupInfo(with: ["message": message],
-                       image: nil,
-                       styleParams: styleParams,
-                       buttonAction: nil)
+        view.setupStateView(with: ["message": message],
+                            image: nil,
+                            styleParams: styleParams,
+                            buttonAction: nil)
         
         return view
     }

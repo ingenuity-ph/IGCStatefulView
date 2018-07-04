@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IGCStatefulView'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Displays a corresponding data state (loading, error, etc) for a UIView instance (includes UITableView and UICollectionView).'
 
 # This description is used to generate tags and improve search results.
