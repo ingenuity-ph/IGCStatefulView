@@ -64,15 +64,13 @@ final class IGCStateView: UIView {
     /// - Parameters:
     ///   - params: Dictionary containing `title`, and/or `message`.
     ///   - image: Icon to be displayed in the view.
-    ///   - styleParams: Dictionary containing the style attributes for each component.
-    ///                  `title` and `message` can be configured by suppling `font` and `color`, while the
-    ///                  `image` can be updated by `size`.
+    ///   - styles: `IGCStateViewStyles` instance to provide additional styling to the view.
     ///   - forLoadingState: Determines if view is for loading state.
     ///   - buttonAction: Closure to be executed when button is pressed.
     ///                   Not supplying this parameter will not display the button.
     func setupStateView(with params: [String: String?],
                         image: UIImage?,
-                        styleParams: [String: Any]?,
+                        styles: IGCStateViewStyles?,
                         forLoadingState: Bool = true,
                         buttonAction: ((UIButton) -> Void)?) {
         // Content
@@ -105,16 +103,16 @@ final class IGCStateView: UIView {
         self.setupInfo(params)
         
         // Style
-        guard let styleParams = styleParams else {
+        guard let styles = styles else {
             return
         }
         
-        self.setupStyle(styleParams)
+        self.setupStyle(styles)
     }
     
     /// Set various info messages to this instance.
     ///
-    /// - Parameter infoParams: UIDictionary instance containing necessary strings to pre-defined properties.
+    /// - Parameter infoParams: `Dictionary` instance containing necessary strings to pre-defined properties.
     private func setupInfo(_ infoParams: [String: String?]) {
         if let title = infoParams["title"] as? String {
             self.titleLabel.text = title
@@ -127,51 +125,18 @@ final class IGCStateView: UIView {
     
     /// Applies styling to this instance based on provided dictionary.
     ///
-    /// - Parameter styleParams: UIDictionary instance containing necessary stying to pre-defined properties.
-    private func setupStyle(_ styleParams: [String: Any]) {
-        if let titleStyleParams = styleParams["title"] as? [String: Any] {
-            if let font = titleStyleParams["font"] as? UIFont {
-                self.titleLabel.font = font
-            }
-            
-            if let color = titleStyleParams["color"] as? UIColor {
-                self.titleLabel.textColor = color
-            }
-        }
+    /// - Parameter styles: `IGCStateViewStyles` instance containing necessary styling to pre-defined properties.
+    private func setupStyle(_ styles: IGCStateViewStyles) {
+        self.titleLabel.font = styles.titleFont
+        self.titleLabel.textColor = styles.titleColor
+        self.messageLabel.font = styles.messageFont
+        self.messageLabel.textColor = styles.messageColor
+        self.heightConstraint.constant = styles.imageSize
+        self.indicatorView.tintColor = styles.indicatorTintColor
+        self.button.titleLabel?.font = styles.buttonFont
+        self.button.tintColor = styles.buttonColor
         
-        if let messageStyleParams = styleParams["message"] as? [String: Any] {
-            if let font = messageStyleParams["font"] as? UIFont {
-                self.messageLabel.font = font
-            }
-            
-            if let color = messageStyleParams["color"] as? UIColor {
-                self.messageLabel.textColor = color
-            }
-        }
-        
-        if let imageStyleParams = styleParams["image"] as? [String: Any] {
-            if let size = imageStyleParams["size"] {
-                self.heightConstraint.constant = CGFloat(size as! Int)
-                
-                self.imageView.updateConstraints()
-            }
-        }
-        
-        if let indicatorStyleParams = styleParams["indicator"] as? [String: Any] {
-            if let tintColor = indicatorStyleParams["tint"] as? UIColor {
-                self.indicatorView.tintColor = tintColor
-            }
-        }
-        
-        if let buttonStyleParams = styleParams["button"] as? [String: Any] {
-            if let font = buttonStyleParams["font"] as? UIFont {
-                self.button.titleLabel?.font = font
-            }
-            
-            if let color = buttonStyleParams["color"] as? UIColor {
-                self.button.tintColor = color
-            }
-        }
+        self.imageView.updateConstraints()
     }
     
 }

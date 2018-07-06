@@ -47,36 +47,38 @@ class SampleTableViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        var state: IGCViewState = .loading(message: "Loading...", styleParams: nil)
+        var state: IGCViewState = .loading(message: "Loading...", styles: nil)
         
         super.viewWillAppear(animated)
         
         self.tableView.configureViewDataState(as: state)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let styles = IGCStateViewStyles(titleFont: UIFont(name: "HelveticaNeue-Bold", size: 30),
+                                            titleColor: UIColor.darkGray,
+                                            messageFont: UIFont(name: "HelveticaNeue", size: 20),
+                                            messageColor: UIColor.lightGray,
+                                            imageSize: 100,
+                                            indicatorTintColor: UIColor.black,
+                                            buttonFont: UIFont(name: "HelveticaNeue", size: 16),
+                                            buttonColor: UIColor.black)
             state = .error(
                 image: UIImage(named: "icon"),
                 title: "Error",
                 message: "Please try again later",
-                styleParams: ["title": ["font": UIFont(name: "HelveticaNeue-Bold", size: 30),
-                                        "color": UIColor.darkGray],
-                              "message": ["font": UIFont(name: "HelveticaNeue", size: 20),
-                                          "color": UIColor.lightGray],
-                              "image": ["size": 100],
-                              "indicator": ["tint": UIColor.black],
-                              "button": ["font": UIFont(name: "HelveticaNeue", size: 16),
-                                         "color": UIColor.black]],
+                styles: styles,
                 buttonAction: { button in
                     let alert = UIAlertController(title: "Alert",
                                                   message: button.title(for: .normal),
                                                   preferredStyle: .alert)
-                    
+
                     alert.addAction(UIAlertAction(title: "Ok",
                                                   style: .default,
                                                   handler: nil))
-                    
+
                     self.present(alert, animated: true, completion: nil)
-            })
+                }
+            )
             
             self.tableView.configureViewDataState(as: state)
         }

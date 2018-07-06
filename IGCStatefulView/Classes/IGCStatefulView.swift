@@ -20,29 +20,53 @@ public enum IGCViewState {
     case success
     /// A loading state view will be displayed to indicate fetching and populating of data.
     /// - message: Text to be displayed.
-    /// - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
-    ///                For `title` and `message`, `font` and `color` options are available.
-    ///                For `image`, `size` option is available.
-    ///                For `indicator`, `tint` option is available.
-    case loading(message: String?, styleParams: [String: Any]?)
+    /// - styles: IGCStateViewStyles instance to provide additional styling to the view.
+    case loading(message: String?, styles: IGCStateViewStyles?)
     /// An error state view will be displayed to indicate error on fetching data.
     /// - image: Image to be displayed.
     /// - title: Primary text to be displayed.
     /// - message: Supporting text to be displayed.
-    /// - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
-    ///                For `title` and `message`, `font` and `color` options are available.
-    ///                For `image`, `size` option is available.
-    ///                For `indicator`, `tint` option is available.
+    /// - styles: IGCStateViewStyles instance to provide additional styling to the view.
     /// - buttonAction: Closure to be executed when button is pressed.
     ///                 Not supplying this parameter will not display the button.
     case error(
         image: UIImage?,
         title: String?,
         message: String,
-        styleParams: [String: Any]?,
+        styles: IGCStateViewStyles?,
         buttonAction: ((UIButton) -> Void)?)
     /// Same behavior as `success`. May be used as default.
     case none
+}
+
+/// Custom type for setting various styles to `IGCStateView` properties.
+public struct IGCStateViewStyles {
+    public var titleFont: UIFont
+    public var titleColor: UIColor
+    public var messageFont: UIFont
+    public var messageColor: UIColor
+    public var imageSize: CGFloat
+    public var indicatorTintColor: UIColor
+    public var buttonFont: UIFont
+    public var buttonColor: UIColor
+    
+    public init(titleFont: UIFont? = UIFont.systemFont(ofSize: 18),
+                titleColor: UIColor? = UIColor.black,
+                messageFont: UIFont? = UIFont.systemFont(ofSize: 16),
+                messageColor: UIColor? = UIColor.gray,
+                imageSize: CGFloat? = 50,
+                indicatorTintColor: UIColor? = UIColor.black,
+                buttonFont: UIFont? = UIFont.systemFont(ofSize: 14),
+                buttonColor: UIColor? = UIColor.black) {
+        self.titleFont = titleFont!
+        self.titleColor = titleColor!
+        self.messageFont = messageFont!
+        self.messageColor = messageColor!
+        self.imageSize = imageSize!
+        self.indicatorTintColor = indicatorTintColor!
+        self.buttonFont = buttonFont!
+        self.buttonColor = buttonColor!
+    }
 }
 
 public extension UIView {
@@ -52,19 +76,19 @@ public extension UIView {
     /// - Parameter state: `IGCViewState` with its corresponding parameters.
     public func configureViewDataState(as state: IGCViewState) {
         switch state {
-        case .loading(message: let message, styleParams: let styleParams):
+        case .loading(message: let message, styles: let styles):
             self.removeDataStateView()
-            self.addSubview(loadingView(with: message, styleParams: styleParams))
+            self.addSubview(loadingView(with: message, styles: styles))
         case .error(image: let image,
                     title: let title,
                     message: let message,
-                    styleParams: let styleParams,
+                    styles: let styles,
                     buttonAction: let buttonAction):
             self.removeDataStateView()
             self.addSubview(errorView(with: image,
                                       title: title,
                                       message: message,
-                                      styleParams: styleParams,
+                                      styles: styles,
                                       buttonAction: buttonAction))
         default:
             self.removeDataStateView()
@@ -77,23 +101,20 @@ public extension UIView {
     ///   - image: Icon to display to the state view.
     ///   - title: Title of the state view.
     ///   - message: Supplementary message of the state view.
-    ///   - styleParams: Dictionary containing either `title`, `message`, `image`, `indicator`, and/or `button` key-value pairs.
-    ///                  For `title`, `message`, and `button`, `font` and `color` options are available.
-    ///                  For `image`, `size` option is available.
-    ///                  For `indicator`, `tint` option is available.
+    ///   - styles: `IGCStateViewStyles` instance to provide additional styling to the view.
     ///   - buttonAction: Closure to be executed when button is pressed.
     ///                   Not supplying this parameter will not display the button.
     /// - Returns: A `IGCStateView` instance configured with supplied parameters.
     private func errorView(with image: UIImage?,
                            title: String?,
                            message: String,
-                           styleParams: [String: Any]?,
+                           styles: IGCStateViewStyles?,
                            buttonAction: ((UIButton) -> Void)?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
         view.setupStateView(with: ["message": message, "title": title],
                             image: image,
-                            styleParams: styleParams,
+                            styles: styles,
                             forLoadingState: false,
                             buttonAction: buttonAction)
         
@@ -104,17 +125,14 @@ public extension UIView {
     ///
     /// - Parameters:
     ///   - message: Supplementary message of the state view.
-    ///   - styleParams: Dictionary containing either title, message, and/or image key-value pairs.
-    ///                  For `title` and `message`, `font` and `color` options are available.
-    ///                  For `image`, `size` option is available.
-    ///                  For `indicator`, `tint` option is available.
+    ///   - styles: `IGCStateViewStyles` instance to provide additional styling to the view.
     /// - Returns: A `IGCStateView` instance configured with supplied parameters.
-    private func loadingView(with message: String? = nil, styleParams: [String: Any]?) -> IGCStateView {
+    private func loadingView(with message: String? = nil, styles: IGCStateViewStyles?) -> IGCStateView {
         let view = IGCStateView(frame: self.bounds)
         
         view.setupStateView(with: ["message": message],
                             image: nil,
-                            styleParams: styleParams,
+                            styles: styles,
                             buttonAction: nil)
         
         return view

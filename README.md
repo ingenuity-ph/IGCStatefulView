@@ -28,20 +28,20 @@ A big thanks to [Sauvik Dolui](https://github.com/sauvikdolui) and his library, 
 
 ## Usage
 
-It serves as an extension to UIView instances wherein it adds a `setViewDataState` method. It accepts a pre-defined enum `IGCStatefulView`. Sample usage is as follows:
+It serves as an extension to `UIView` instances, wherein it adds a `configureViewDataState` method. It accepts a pre-defined `IGCStatefulView` enum value. Sample usage is as follows:
 
 ```swift
 // UIView
-self.infoView.configureViewDataState(as: .loading(message: nil, styleParams: nil))
+self.infoView.configureViewDataState(as: .loading(message: nil, styles: nil))
 
 // UITableView
-self.tableView.configureViewDataState(as: .loading(message: "Loading...", styleParams: nil))
+self.tableView.configureViewDataState(as: .loading(message: "Loading...", styles: nil))
 
 // UICollectionView
 self.collectionView.configureViewDataState(as: .success)
 ```
 
-Customizing is available but fairly limited to a few options for each of the state view's attributes, namely: `title`, `message`, `image`, `indicator`, and `button`. Here, a sample styling implementation of all available options is provided, along with its input.
+Custom styling is available but fairly limited to a few options for each of `IGCStateView` instance's properties. Styling is made easy by using the `IGCStateViewStyles` struct, wherein all styling options has been defined along with its initial values. Sample usage is as follows:
 
 ##### Code
 
@@ -71,4 +71,3 @@ Jason Jon E. Carreos (jason@ingenuity.ph)
 ## License
 
 IGCStatefulView is available under the MIT license. See the LICENSE file for more info.
-

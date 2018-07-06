@@ -46,7 +46,7 @@ class SampleCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.collectionView.configureViewDataState(as: .loading(message: nil, styleParams: nil))
+        self.collectionView.configureViewDataState(as: .loading(message: nil, styles: nil))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.collectionView.configureViewDataState(as: .success)
