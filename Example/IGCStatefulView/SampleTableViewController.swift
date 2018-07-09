@@ -61,7 +61,9 @@ class SampleTableViewController: UIViewController {
                                             imageSize: 100,
                                             indicatorTintColor: UIColor.black,
                                             buttonFont: UIFont(name: "HelveticaNeue", size: 16),
-                                            buttonColor: UIColor.black)
+                                            buttonColor: UIColor.black,
+                                            backgroundColor: UIColor.gray)
+            
             state = .error(
                 image: UIImage(named: "icon"),
                 title: "Error",

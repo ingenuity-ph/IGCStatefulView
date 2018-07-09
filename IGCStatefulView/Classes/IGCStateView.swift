@@ -17,6 +17,7 @@ final class IGCStateView: UIView {
     // MARK: Outlets
     
     @IBOutlet private var contentView: UIView!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -129,14 +130,27 @@ final class IGCStateView: UIView {
     private func setupStyle(_ styles: IGCStateViewStyles) {
         self.titleLabel.font = styles.titleFont
         self.titleLabel.textColor = styles.titleColor
+        
         self.messageLabel.font = styles.messageFont
         self.messageLabel.textColor = styles.messageColor
+        
         self.heightConstraint.constant = styles.imageSize
+        
         self.indicatorView.tintColor = styles.indicatorTintColor
+        
         self.button.titleLabel?.font = styles.buttonFont
         self.button.tintColor = styles.buttonColor
         
         self.imageView.updateConstraints()
+        
+        guard let imageOptions = styles.backgroundImageOptions else {
+            self.backgroundImageView.backgroundColor = styles.backgroundColor
+            
+            return
+        }
+        
+        self.backgroundImageView.image = imageOptions.image
+        self.backgroundImageView.contentMode = imageOptions.contentMode
     }
     
 }

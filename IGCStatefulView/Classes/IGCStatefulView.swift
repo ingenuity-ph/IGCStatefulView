@@ -41,6 +41,8 @@ public enum IGCViewState {
 
 /// Custom type for setting various styles to `IGCStateView` properties.
 public struct IGCStateViewStyles {
+    public typealias ImageOptions = (image: UIImage, contentMode: UIViewContentMode)
+    
     public var titleFont: UIFont
     public var titleColor: UIColor
     public var messageFont: UIFont
@@ -49,6 +51,8 @@ public struct IGCStateViewStyles {
     public var indicatorTintColor: UIColor
     public var buttonFont: UIFont
     public var buttonColor: UIColor
+    public var backgroundColor: UIColor
+    public var backgroundImageOptions: ImageOptions?
     
     public init(titleFont: UIFont? = UIFont.systemFont(ofSize: 18),
                 titleColor: UIColor? = UIColor.black,
@@ -57,15 +61,29 @@ public struct IGCStateViewStyles {
                 imageSize: CGFloat? = 50,
                 indicatorTintColor: UIColor? = UIColor.black,
                 buttonFont: UIFont? = UIFont.systemFont(ofSize: 14),
-                buttonColor: UIColor? = UIColor.black) {
+                buttonColor: UIColor? = UIColor.black,
+                backgroundColor: UIColor? = UIColor.white,
+                backgroundImageOptions: ImageOptions? = nil) {
         self.titleFont = titleFont!
         self.titleColor = titleColor!
+        
         self.messageFont = messageFont!
         self.messageColor = messageColor!
+        
         self.imageSize = imageSize!
+        
         self.indicatorTintColor = indicatorTintColor!
+        
         self.buttonFont = buttonFont!
         self.buttonColor = buttonColor!
+        
+        self.backgroundColor = backgroundColor!
+        
+        guard let imageOptions = backgroundImageOptions else {
+            return
+        }
+        
+        self.backgroundImageOptions = imageOptions
     }
 }
 

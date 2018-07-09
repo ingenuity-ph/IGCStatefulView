@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IGCStateView" customModule="IGCStatefulView" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundImageView" destination="bjb-xN-5kQ" id="Zq2-4u-hK2"/>
                 <outlet property="button" destination="Xel-Cx-PQl" id="6b3-qf-Djb"/>
                 <outlet property="centerConstraint" destination="jmM-Jo-W4Z" id="t8d-mn-Gqt"/>
                 <outlet property="contentView" destination="WoB-Kn-GEm" id="V8f-yx-6vX"/>
@@ -27,6 +28,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bjb-xN-5kQ">
+                    <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oUj-fd-cl2">
                     <rect key="frame" x="125" y="218.5" width="125" height="125"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,9 +81,13 @@
                 <constraint firstItem="kq9-RF-DD5" firstAttribute="centerY" secondItem="WoB-Kn-GEm" secondAttribute="centerY" id="V6V-4q-Yn3"/>
                 <constraint firstAttribute="trailing" secondItem="n6D-qf-Mt3" secondAttribute="trailing" constant="10" id="cDE-Yn-sGu"/>
                 <constraint firstItem="Xel-Cx-PQl" firstAttribute="centerX" secondItem="WoB-Kn-GEm" secondAttribute="centerX" id="dYS-ZT-liN"/>
+                <constraint firstItem="bjb-xN-5kQ" firstAttribute="centerX" secondItem="WoB-Kn-GEm" secondAttribute="centerX" id="jVk-cM-UuZ"/>
                 <constraint firstItem="5eB-jH-LsX" firstAttribute="centerY" secondItem="WoB-Kn-GEm" secondAttribute="centerY" constant="30" id="jmM-Jo-W4Z"/>
                 <constraint firstAttribute="trailing" secondItem="5eB-jH-LsX" secondAttribute="trailing" id="qXZ-Jy-Ho2"/>
+                <constraint firstItem="bjb-xN-5kQ" firstAttribute="height" secondItem="WoB-Kn-GEm" secondAttribute="height" id="vlj-B0-T0e"/>
+                <constraint firstItem="bjb-xN-5kQ" firstAttribute="centerY" secondItem="WoB-Kn-GEm" secondAttribute="centerY" id="wLc-EL-rPe"/>
                 <constraint firstItem="5eB-jH-LsX" firstAttribute="leading" secondItem="WoB-Kn-GEm" secondAttribute="leading" id="yJj-F3-dPB"/>
+                <constraint firstItem="bjb-xN-5kQ" firstAttribute="width" secondItem="WoB-Kn-GEm" secondAttribute="width" id="zGG-Fy-Dus"/>
             </constraints>
         </view>
     </objects>
