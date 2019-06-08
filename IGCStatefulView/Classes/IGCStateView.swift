@@ -45,7 +45,7 @@ final class IGCStateView: UIView {
         
         bundle.loadNibNamed("StateView", owner: self, options: nil)
         
-        self.button.contentEdgeInsets = UIEdgeInsetsMake(5,5,5,5)
+        self.button.contentEdgeInsets = UIEdgeInsets.init(top: 5,left: 5,bottom: 5,right: 5)
         
         // Content View
         self.addSubview(self.contentView)
