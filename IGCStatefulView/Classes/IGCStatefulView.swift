@@ -41,7 +41,7 @@ public enum IGCViewState {
 
 /// Custom type for setting various styles to `IGCStateView` properties.
 public struct IGCStateViewStyles {
-    public typealias ImageOptions = (image: UIImage, contentMode: UIViewContentMode)
+    public typealias ImageOptions = (image: UIImage, contentMode: UIView.ContentMode)
     
     public var titleFont: UIFont
     public var titleColor: UIColor
@@ -92,7 +92,7 @@ public extension UIView {
     /// Sets a corresponding `IGCStateView` to a `UIView` instance based on provided `IGCViewState`.
     ///
     /// - Parameter state: `IGCViewState` with its corresponding parameters.
-    public func configureViewDataState(as state: IGCViewState) {
+    func configureViewDataState(as state: IGCViewState) {
         switch state {
         case .loading(message: let message, styles: let styles):
             self.removeDataStateView()
